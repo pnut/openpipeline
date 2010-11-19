@@ -1,4 +1,14 @@
 import maya.cmds as cmds
+import file
+reload(file)
 
-def open(path):
-    cmds.file(path, f=True, o=True)
+class fileMaya (file.File):
+    def __init__(self, debug=0):
+        self.debug = debug
+        
+    def fileMayaCurrentPath(self):
+        currentPath = cmds.file(q = True, exn = True)
+        if self.debug: print 'currentPath : ' + currentPath
+    
+
+    
