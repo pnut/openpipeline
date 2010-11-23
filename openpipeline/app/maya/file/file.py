@@ -18,15 +18,6 @@ class fileMaya (file.File):
         return fileName
         if self.debug: print fileName
         
-    #Returns folder where currently opened file lives. ##pyapor## 
-    def mayaLoc(self):
-        loc = self.myFilePath()
-        if self.debug: print loc
-        locPath = os.path.split(loc)
-        locDir = locPath[0]
-        if self.debug: print locDir
-        return locDir
-    
     def mayaSave(self):
         fileSave = cmds.file(s = True)
         if self.debug: print fileSave + ' has been saved.'
