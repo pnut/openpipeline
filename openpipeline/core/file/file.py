@@ -35,5 +35,23 @@ class fileCore ():
             pass
 	else:
             os.mkdir(self.filePath + "/" + folderName)
-	    if self.debug: print 'the folder' + folderName + ' has been created under : ' + folderPath	    
+	    if self.debug: print 'the folder' + folderName + ' has been created under : ' + folderPath
+            
+    #make three folders automatically.
+    def fileCoreMakeProjFolder(self, projectFolder):
+        self.projFolderName = projectFolder
+	projFolderPath = os.path.join(self.filePath, self.projFolderName)
+	print "projFolderPath : " +  projFolderPath
+
+	if self.query(projFolderPath):
+		if self.debug: print 'the folder ' + projFolderName + 'is already exist.'
+		pass
+	else:
+	
+		os.mkdir(self.filePath + "/" + projFolderName)
+		os.mkdir(projFolderPath + "/workshopFiles")
+		os.mkdir(projFolderPath + "/masterFiles")
+		if self.debug: print 'the project folder ' + projFolderName + ' has been created under : ' + projFolderPath
+				    
+
 
