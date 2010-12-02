@@ -13,14 +13,15 @@ class Workshop(file.File):
         workshopPath = os.path.join(path, "workshop", name)
                 
         if self.query(workshopPath):
-            print workshopPath
+            if self.debug: print workshopPath
             return workshopPath
         else:
-            print "error"
+            if self.debug: print "error"
+       
     
     #Returns the filename path incrementally named according to the list of files in the folder, this is specifically for workshop renaming ##pyapor##
-    def renameIncremental(self, name, folderPath):
-        workshopList = self.quieryDirList(folderPath)
+    def wsCoreIncremental(self, name, folderPath):
+        workshopList = self.fileCoreQueryDirList(folderPath)
         workshopLen = len(workshopList)
         lastWorkshop = workshopList[workshopLen]
         if self.debug: print lastWorkshop
@@ -29,19 +30,19 @@ class Workshop(file.File):
         workshopFileNumber = workshopFileNumber ++ 1
         workshopFileNumber = str(workshopFileNumber)
         workshopFileName = name + "_workshop_" + workshopFileNumber.zfill(4)
-        filePath = os.path.join(path, "workshop", workshopFileName)
-        return filePath
-        if self.debug: print filePath
+        workshopPath = os.path.join(path, "workshop", workshopFileName)
+        if self.debug: print workshopPath
+        return workshopPath
     
     #Returns the the file path of the workshop that needs to be saved. Do you prefer to return the whole path or just the renamed workshop filename? ##pyapor##
-    def saveWorkshop(self, name, folderPath):
-        if self.queryDir(folderPath):
+    def wsCoreSave(self, name, folderPath):
+        if self.fileCoreQueryDir(folderPath):
             fileNum = 1
             #I think that hardcoding the "workshop" into the filename is appropriate in this case. 
             workshopName = name + "workshop" + fileNum.zfill(4)
             if self.debug: print workshopName
-            workshopFilePath = os.path.join(path, workshop, workshopName)
-            return workshopFilePath
-            if self.debug: print workshopFilePath
+            workshopFileName = os.path.join(path, workshop, workshopName)
+            if self.debug: print workshopFileName
         else:
             self.renameIncremental(name, folderPath)
+    
