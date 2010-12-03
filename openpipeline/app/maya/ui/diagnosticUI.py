@@ -28,8 +28,39 @@ class diagnosticUI(window.window):
         Name: diagnosticUI.py
         Input: filePath (a root file path that contains the 'openpipeline' folder)
         Returns: none
-        Description:  This script is an example of how a single class can manage and store the data for all Maya OpenPipeline GUIs, and with it's loadPrefs() and savePrefs() procedures, it also demonstrates it's potential ability to save out both session independent & application independent information.
-        Use: This script can work in conjunction with the 'begin.py' module or on it's own. If working with the 'begin.py' module (the most basic method), see the 'begin.py' script for further directions. If using the 'diagnosticUI.py' module on it's own, before instantiating this class you must first append/insert the system path that contains the openpipeline folder. Upon initialization, this class inherits functionality from the 'window.py' module, and as a result has the method 'showWindow' available to it. Example - self.showWindow() (or whatever you name the instance of this module) will show the Diagnostic UI. The method entitled 'content' contains the actual UI commands. The 'showWindow' method uses this command to build a dockable or stand-alone window. See the 'window.py' module for more information on this relationship. The loadPrefs() and savePrefs() procedures only work when this 'diagnosticUI' module is instantiated with an incoming 'filePath' string. Part of the purpose of the 'begin.py' module is to allow the user to select this path, which then gets passed to the 'diagnostic.py' module. Attributes such as self.width stupilates the width of the window. self.dockable enables this window as a floating dockable window (if using Maya2011). A future TODO might be to further develop and refine this dock functionality. This could be done in the 'window.py' base class by creating a simple drop down for each window that docks the window left, right, up or down, which might create a more desirable outcome than the somewhat still buggy 'floating but dockable' mode that is currently offered in Maya2011, which often ends up in uncontrollable window sizes.
+        Description:  This script is an example of how a single class can
+        manage and store the data for all Maya OpenPipeline GUIs, and with
+        it's loadPrefs() and savePrefs() procedures, it also demonstrates
+        it's potential ability to save out both session independent & application
+        independent information.
+        
+        Use: This script can work in conjunction with the 'begin.py' module or
+        on it's own. If working with the 'begin.py' module (the most basic
+        method), see the 'begin.py' script for further directions. If using
+        the 'diagnosticUI.py' module on it's own, before instantiating this
+        class you must first append/insert the system path that contains the
+        openpipeline folder. Upon initialization, this class inherits
+        functionality from the 'window.py' module, and as a result has the
+        method 'showWindow' available to it. Example - self.showWindow()
+        (or whatever you name the instance of this module) will show the
+        Diagnostic UI. The method entitled 'content' contains the actual
+        UI commands. The 'showWindow' method uses this command to build a
+        dockable or stand-alone window. See the 'window.py' module for more
+        information on this relationship. The loadPrefs() and savePrefs()
+        procedures only work when this 'diagnosticUI' module is instantiated
+        with an incoming 'filePath' string. Part of the purpose of the
+        'begin.py' module is to allow the user to select this path, which
+        then gets passed to the 'diagnostic.py' module. Attributes such as
+        self.width stupilates the width of the window. self.dockable enables t
+        his window as a floating dockable window (if using Maya2011).
+        
+        A future TODO might be to further develop and refine this dock
+        functionality. This could be done in the 'window.py' base class by
+        creating a simple drop down for each window that docks the window
+        left, right, up or down, which might create a more desirable outcome
+        than the somewhat still buggy 'floating but dockable' mode that is
+        currently offered in Maya2011, which often ends up in uncontrollable
+        window sizes.
         '''
         
         self.UIObjects = UIObjects.UIObjects()
@@ -43,7 +74,7 @@ class diagnosticUI(window.window):
         self.UIObjects.openPipelineSaveMasterGUI = openPipelineSaveMasterGUI.openPipelineSaveMasterGUI()
         self.UIObjects.openPipelineProjectManagerGUI = openPipelineProjectManagerGUI.openPipelineProjectManagerGUI()
         self.UIObjects.openPipelineProjDialogGUI = openPipelineProjDialogGUI.openPipelineProjDialogGUI()
-        self.UIObjects.openPipelineMainUI = openPipelineMainUI.openPipelineMainUI()
+        self.UIObjects.openPipelineMainUI = openPipelineMainUI.openPipelineMainUI(self.filePath)
     
     def content(self):
         
