@@ -22,6 +22,10 @@ class begin():
         
         openPipeline.diagnosticUI.showWindow()
         
+        To Do:
+        
+        Run without diagnostic window...
+        
         '''
         
         self.sourceFilesPath()
