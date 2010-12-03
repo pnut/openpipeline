@@ -27,11 +27,13 @@ class fileCore():
         if self.debug: print 'The location of' + fileName + 'is: ' + locDir
         return locDir
     
-    def fileCorePCreator(self, dir=[]):
+    def fileCorePathCreator(self, dir=[]):
         path=''
         for item in dir:
             path = os.path.join(path, item)
-            
+        path = '/' + path
+        if  self.debug: print path
+        return path
             
     #make a folder. ##jum## ##pyapor##
     def fileCoreMakeFolder(self, folderPath, folderName):
@@ -60,7 +62,8 @@ class fileCore():
                     continue
                 else:
                     createFolder =  os.mkdir(folder + '/' + item)
-                    
+                    return createFolder
+                
 	    if self.debug: print 'the project folder ' + projFolderName + ' has been created under : ' + projFolderPath
 
     #Returns whether a folder is empty or not. ##pyapor##
