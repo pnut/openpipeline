@@ -9,8 +9,12 @@ class begin():
         Name: begin.py
         Input: none
         Returns: none
-        Description: This script is an example of a potential entry point for the OpenPipeline Maya GUI
-        Use: Initialization of this script will open a dialogue window. Using that window, select the folder that contains the 'openpipeline' directory.
+        Description: This script is an example of a potential entry point for
+        the OpenPipeline Maya GUI
+        
+        Use: Initialization of this script will open a dialogue window.
+        Using that window, select the folder that contains the 'openpipeline'
+        directory.
         
         Examples:
         

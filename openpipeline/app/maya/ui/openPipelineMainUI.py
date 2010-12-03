@@ -10,11 +10,12 @@ import maya.cmds as cmds
 import window as window
 reload(window)
 
+import os
 import UIObjects as UIObjects
 
 class openPipelineMainUI(window.window):
 
-    def __init__(self):
+    def __init__(self, iconLocation):
         
         self.UIObjects = UIObjects.UIObjects()
         
@@ -23,14 +24,14 @@ class openPipelineMainUI(window.window):
         self.prettyName = "OpenPipeline 2.0"
         self.name = "openPipelineUI"
         self.dockable=1
-        self.scriptLocation = "userName/Documents/OpenPipeline"
+        self.iconLocation = os.path.join(iconLocation, "openpipeline", "app", "maya", "ui")
         
         self.lfMargin = 5
         self.rtMargin = 5
         
-        self.op_icon_filePath='\\\\venkman\KICKSTAND\DEV\openPipeline\openPipeline\\app\maya\ui\openPipelineIcon.jpg'
-        self.op_currOpenPreview_filePath='\\\\venkman\KICKSTAND\DEV\openPipeline\openPipeline\\app\maya\ui\\noPreview.jpg'
-        self.op_defaultPreview_filePath='\\\\venkman\KICKSTAND\DEV\openPipeline\openPipeline\\app\maya\ui\\defaultPreview.jpg'
+        self.op_icon_filePath = os.path.join(self.iconLocation, 'openPipelineIcon.jpg')
+        self.op_currOpenPreview_filePath = os.path.join(self.iconLocation, 'noPreview.jpg')
+        self.op_defaultPreview_filePath=os.path.join(self.iconLocation, 'defaultPreview.jpg')
         
         
         self.anno_projectList="Select from the available Projects."
