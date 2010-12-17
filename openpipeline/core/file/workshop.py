@@ -7,7 +7,7 @@ class Workshop(file.File):
     def __init__(self, debug=0):
         self.debug = debug
     
-    def open(self, path, item, version):
+    def wsCoreOpen(self, path, item, version):
         # break out workshop
         name = '%(item)s_workshop_%(version)04d.mb' % {'item': item, "version": version}     
         workshopPath = os.path.join(path, "workshop", name)
@@ -17,6 +17,7 @@ class Workshop(file.File):
             return workshopPath
         else:
             if self.debug: print "error"
+            return
        
     
     #Returns the filename path incrementally named according to the list of files in the folder, this is specifically for workshop renaming ##pyapor##
@@ -30,7 +31,7 @@ class Workshop(file.File):
         workshopFileNumber = workshopFileNumber ++ 1
         workshopFileNumber = str(workshopFileNumber)
         workshopFileName = name + "_workshop_" + workshopFileNumber.zfill(4)
-        workshopPath = os.path.join(path, "workshop", workshopFileName)
+        workshopPath = os.path.join(folderPath, "workshop", workshopFileName)
         if self.debug: print workshopPath
         return workshopPath
     
@@ -41,8 +42,11 @@ class Workshop(file.File):
             #I think that hardcoding the "workshop" into the filename is appropriate in this case. 
             workshopName = name + "workshop" + fileNum.zfill(4)
             if self.debug: print workshopName
-            workshopFileName = os.path.join(path, workshop, workshopName)
-            if self.debug: print workshopFileName
+            workshopFilePath = os.path.join(folderPath, workshopName)
+            if self.debug: print workshopFilePath
+            return workshopFilePath
         else:
             self.renameIncremental(name, folderPath)
+            if self.debug: print workshopFilePath
+            return workshopFilePath
     
