@@ -6,7 +6,7 @@
 ############################################
 
 import maya.cmds as cmds
-
+import app.maya.file as mayaFile
 import window as window
 reload(window)
 
@@ -244,7 +244,8 @@ class openPipelineMainUI(window.window):
         self.op_currOpenSeperator03 = cmds.separator('op_currOpenSeperator03', parent=self.op_currOpen_formLayout, style="double", w=410)
         self.op_currOpenActions_txt = cmds.text('op_currOpenActions_txt', parent=self.op_currOpen_formLayout, fn="smallBoldLabelFont", label="Actions", w=100, al="left")
         
-        self.op_currOpenSaveWorkshop_btn = cmds.button('op_currOpenSaveWorkshop_btn', parent=self.op_currOpen_formLayout, l="Save Workshop...", w=164, bgc=(.8, .6, .5), c="openPipelineSaveWorkshopGUI", ann=self.anno_saveWorkshop)
+        self.op_currOpenSaveWorkshop_btn = cmds.button('op_currOpenSaveWorkshop_btn', parent=self.op_currOpen_formLayout, l="Save Workshop...", w=164, bgc=(.8, .6, .5), c="openPipelineSaveWorkshopGUI", ann=self.anno_saveWorkshop, command= mayaFile.)
+        #
         self.op_currOpenMaster_btn = cmds.button('op_currOpenMaster_btn', parent=self.op_currOpen_formLayout, l="MASTER...", w=164, bgc=(.9, .7, .4), c="openPipelineSaveMasterFileGUI", ann=self.anno_master)
         self.op_currOpenRevive_btn = cmds.button('op_currOpenRevive_btn', parent=self.op_currOpen_formLayout, l="Revive...", bgc=(.5, .7, .7), w=82, c="openPipelineReviveGUI", ann=self.anno_revive)
         self.op_currOpenClose_btn = cmds.button('op_currOpenClose_btn', parent=self.op_currOpen_formLayout, l="Close", bgc=(.8, .8, .8), c="openPipelineCloseCurrent", ann=self.anno_closeFile)
