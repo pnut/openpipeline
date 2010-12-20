@@ -6,7 +6,11 @@
 ############################################
 
 import maya.cmds as cmds
-import app.maya.file as mayaFile
+import app
+import app.maya
+import app.maya.file
+import app.maya.file.workshop as ws
+reload (ws)
 import window as window
 reload(window)
 
@@ -83,7 +87,10 @@ class openPipelineMainUI(window.window):
         self.anno_shotComponentList="Double-click to edit Component. Hold down right mouse button for more options."
         self.anno_newShotComponent="Create a new Component for the selected Asset."
         self.anno_removeShotComponent="Remove the selected Component from the inventory."
-    
+    def saveWorkshop(self, *args,** Kwarg):
+        ws.workshop().work()
+        print "foo"
+        
     def content(self):
         
         #--------------------------------------------
@@ -244,7 +251,7 @@ class openPipelineMainUI(window.window):
         self.op_currOpenSeperator03 = cmds.separator('op_currOpenSeperator03', parent=self.op_currOpen_formLayout, style="double", w=410)
         self.op_currOpenActions_txt = cmds.text('op_currOpenActions_txt', parent=self.op_currOpen_formLayout, fn="smallBoldLabelFont", label="Actions", w=100, al="left")
         
-        self.op_currOpenSaveWorkshop_btn = cmds.button('op_currOpenSaveWorkshop_btn', parent=self.op_currOpen_formLayout, l="Save Workshop...", w=164, bgc=(.8, .6, .5), c="openPipelineSaveWorkshopGUI", ann=self.anno_saveWorkshop, command= mayaFile.)
+        self.op_currOpenSaveWorkshop_btn = cmds.button('op_currOpenSaveWorkshop_btn', parent=self.op_currOpen_formLayout, l="Save Workshop...", w=164, bgc=(.8, .6, .5), ann=self.anno_saveWorkshop, command = self.saveWorkshop)
         #
         self.op_currOpenMaster_btn = cmds.button('op_currOpenMaster_btn', parent=self.op_currOpen_formLayout, l="MASTER...", w=164, bgc=(.9, .7, .4), c="openPipelineSaveMasterFileGUI", ann=self.anno_master)
         self.op_currOpenRevive_btn = cmds.button('op_currOpenRevive_btn', parent=self.op_currOpen_formLayout, l="Revive...", bgc=(.5, .7, .7), w=82, c="openPipelineReviveGUI", ann=self.anno_revive)

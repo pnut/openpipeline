@@ -2,7 +2,7 @@ import maya.cmds as cmds
 import core.file.file as file
 reload(file)
 
-class FileMaya (file.File):
+class FileMaya (file.fileCore):
     def __init__(self, debug=0):
         self.debug = debug
         
