@@ -88,7 +88,7 @@ class openPipelineMainUI(window.window):
         self.anno_newShotComponent="Create a new Component for the selected Asset."
         self.anno_removeShotComponent="Remove the selected Component from the inventory."
     def saveWorkshop(self, *args,** Kwarg):
-        ws.workshop().work()
+        ws.workshop().wsMayaSave("/Users/pedroyapor/Documents", "test")
         print "foo"
         
     def content(self):

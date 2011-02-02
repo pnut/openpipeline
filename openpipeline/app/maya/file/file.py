@@ -1,8 +1,8 @@
 import maya.cmds as cmds
 import core.file.file as file
 reload(file)
-
-class FileMaya (file.fileCore):
+print 'fileMaya module is open'
+class fileMaya(file.fileCore):
     def __init__(self, debug=0):
         self.debug = debug
         
