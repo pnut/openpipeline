@@ -1,9 +1,9 @@
 import os
-
+import app.maya.file.workshop as workshop
 import file
 reload(file)
 
-class Workshop(file.File):
+class workshopCore(file.fileCore):
     def __init__(self, debug=0):
         self.debug = debug
     

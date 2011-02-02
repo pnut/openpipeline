@@ -1,8 +1,9 @@
 import os
-
+print 'Inhereting from fileCore!'
 class fileCore():
     def __init__(self, debug=0):
         self.debug = debug
+        if debug: print 'foo'
         
     def query(self, path):
         if os.path.exists(path):
