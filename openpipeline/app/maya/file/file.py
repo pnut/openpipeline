@@ -1,10 +1,13 @@
 import maya.cmds as cmds
 import core.file.file as file
 reload(file)
-print 'fileMaya module is open'
-class fileMaya(file.fileCore):
+ 
+
+class FileMaya (file.FileCore):
+
     def __init__(self, debug=0):
         self.debug = debug
+        if self.debug: print 'FileMaya init'
         
     def mayaOpen(self, filePath, bool=0):
         if bool:
@@ -56,3 +59,5 @@ class fileMaya(file.fileCore):
         else:
             cmds.file(new = True, f = True)
             return
+#!/usr/bin/env python
+
