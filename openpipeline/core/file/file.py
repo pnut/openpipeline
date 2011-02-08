@@ -1,9 +1,11 @@
 import os
 print 'Inhereting from fileCore!'
-class fileCore():
-    def __init__(self, debug=0):
+class FileCore():
+    def __init__(self, debug=1):
         self.debug = debug
-        if debug: print 'foo'
+
+        if self.debug: print 'FileCore init'
+
         
     def query(self, path):
         if os.path.exists(path):
@@ -69,22 +71,26 @@ class fileCore():
 
     #Returns whether a folder is empty or not. ##pyapor##
     def fileCoreQueryDir(self, folderPath):
+        print folderPath
         dirList = os.listdir(folderPath)
+        if self.debug: print dirList
         if dirList == [] :
             if self.debug: folderPath + " is empty."
             return True
         else:
-             if self.debug:
-                 dirList = self.queryDirList()
-                 print ('The list of files in ' + folderPath + ' is ' + dirList + '.')
-             return False
+            dirList = os.listdir(folderPath)
+            dirList = str(dirList)
+            print ('The list of files in ' + folderPath + ' is ' + dirList + '.')
+            return False
     
     #Brings back a list of all of the files in a folder... this could probably be used later on to check if any files are missing. ##pyapor##  
     def fileCoreQueryDirList(self, folderPath):
-        Folder = os.path.join(path, folderPath)
-        dirList = os.listdir(Folder)
+        dirList = os.listdir(folderPath)
         if dirList == [] :
             return False
         else:
             if self.debug: print dirList
             return dirList
+    
+    def fileFoo(self):
+        print 'file foo!!'

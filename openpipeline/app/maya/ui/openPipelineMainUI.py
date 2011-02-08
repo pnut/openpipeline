@@ -5,11 +5,12 @@
 # Returns: none
 ############################################
 
+
 import maya.cmds as cmds
-import app
-import app.maya
-import app.maya.file
-import app.maya.file.workshop as ws
+#import app
+#import app.maya
+print 'foo'
+import openpipeline.app.maya.file.workshop as ws
 reload (ws)
 import window as window
 reload(window)
@@ -19,7 +20,8 @@ import UIObjects as UIObjects
 
 class openPipelineMainUI(window.window):
 
-    def __init__(self, iconLocation):
+    def __init__(self, iconLocation, debug=1):
+        self.debug = debug
         
         self.UIObjects = UIObjects.UIObjects()
         
@@ -87,9 +89,14 @@ class openPipelineMainUI(window.window):
         self.anno_shotComponentList="Double-click to edit Component. Hold down right mouse button for more options."
         self.anno_newShotComponent="Create a new Component for the selected Asset."
         self.anno_removeShotComponent="Remove the selected Component from the inventory."
-    def saveWorkshop(self, *args,** Kwarg):
-        ws.workshop().wsMayaSave("/Users/pedroyapor/Documents", "test")
-        print "foo"
+
+        
+    def saveWorkshop(self, *args):
+        if self.debug: print "foo saveWorkshop @ UI"
+        if self.debug: foo = ws.WorkshopMaya()
+        foo.wsMayaSave()
+        
+        
         
     def content(self):
         
@@ -252,7 +259,7 @@ class openPipelineMainUI(window.window):
         self.op_currOpenActions_txt = cmds.text('op_currOpenActions_txt', parent=self.op_currOpen_formLayout, fn="smallBoldLabelFont", label="Actions", w=100, al="left")
         
         self.op_currOpenSaveWorkshop_btn = cmds.button('op_currOpenSaveWorkshop_btn', parent=self.op_currOpen_formLayout, l="Save Workshop...", w=164, bgc=(.8, .6, .5), ann=self.anno_saveWorkshop, command = self.saveWorkshop)
-        #
+        
         self.op_currOpenMaster_btn = cmds.button('op_currOpenMaster_btn', parent=self.op_currOpen_formLayout, l="MASTER...", w=164, bgc=(.9, .7, .4), c="openPipelineSaveMasterFileGUI", ann=self.anno_master)
         self.op_currOpenRevive_btn = cmds.button('op_currOpenRevive_btn', parent=self.op_currOpen_formLayout, l="Revive...", bgc=(.5, .7, .7), w=82, c="openPipelineReviveGUI", ann=self.anno_revive)
         self.op_currOpenClose_btn = cmds.button('op_currOpenClose_btn', parent=self.op_currOpen_formLayout, l="Close", bgc=(.8, .8, .8), c="openPipelineCloseCurrent", ann=self.anno_closeFile)
