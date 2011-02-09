@@ -23,23 +23,27 @@ class WorkshopCore(file.FileCore):
     
     #Returns the filename path incrementally named according to the list of files in the folder, this is specifically for workshop renaming ##pyapor##
     def wsCoreIncremental(self, name, folderPath):
-        if self.debug: print 'foo'
         workshopList = self.fileCoreQueryDirList(folderPath)
+        if self.debug: print "List of workshop files:"
+        if self.debug: print workshopList
         workshopLen = len(workshopList)
-        workshoplen = str(workshopLen)
-        if self.debug: print workshopLen + 'is the length of the workshop list'
+        workshopLen = str(workshopLen)
+        if self.debug: print 'There are ' + workshopLen + ' workshop files in' + folderPath + '.'
         lastWorkshop = workshopList[len(workshopList)-1]
-        if self.debug: print lastWorkshop + ' is the las workshop'
+        if self.debug: print lastWorkshop + ' is the last workshop.'
         workshopFileName = os.path.splitext(lastWorkshop)
-        if self.debug: print workshopFileName
-        workshopFileNumber = workshopFileName[1]
-        if self.debug: print workshopFileNumber
+        if self.debug: print workshopFileName[0] + ' is the name of the last workshop file.' 
+        workshopFileName = workshopFileName[0]
+        
+        workshopFileNumber = workshopFileName[-4:]
+        if self.debug: print workshopFileNumber + ' is number of the last workshop.'
         workshopFileNumber = int(workshopFileNumber)
-        if self.debug: print workshopFileNumber
-        #workshopFileNumber = workshopFileNumber + 1
+        workshopFileNumber += 1
         workshopFileNumber = str(workshopFileNumber)
+        if self.debug: print workshopFileNumber + ' is number of the new workshop.'
+        
         workshopFileName = name + "_workshop_" + workshopFileNumber.zfill(4)
-        workshopPath = os.path.join(folderPath, "workshop", workshopFileName)
+        workshopPath = os.path.join(folderPath, workshopFileName)
         if self.debug: print workshopPath
         return workshopPath
     
@@ -49,14 +53,14 @@ class WorkshopCore(file.FileCore):
         if self.fileCoreQueryDir(folderPath):
             fileNum = 1
             fileNum = str(fileNum)
-            #I think that hardcoding the "workshop" into the filename is appropriate in this case. 
-            workshopName = name + "workshop_" + fileNum.zfill(4)
-            if self.debug: print workshopName
+            #I think that hardcoding the "workshop" into the filename is appropriate in this case. ##pyapor## 
+            workshopName = name + "_workshop_" + fileNum.zfill(4)
+            if self.debug: print workshopName + ' is the workshop file name.'
             workshopFilePath = os.path.join(folderPath, workshopName)
             if self.debug: print workshopFilePath
             return workshopFilePath
         else:
-            self.wsCoreIncremental(name, folderPath)
+            workshopFilePath = self.wsCoreIncremental(name, folderPath)
             if self.debug: print workshopFilePath
             return workshopFilePath
     

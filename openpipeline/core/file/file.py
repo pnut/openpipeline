@@ -1,4 +1,5 @@
 import os
+import re
 print 'Inhereting from fileCore!'
 class FileCore():
     def __init__(self, debug=1):
@@ -19,7 +20,9 @@ class FileCore():
     #get the file name from a path. ##jum## ##pyapor##
     def fileCoreFileName(self):
         fileName = os.path.split(self.filePath)
+        fileName = str(fileName)
         if self.debug: print 'the fileName : ' + fileName[1]
+        return fileName
         
     #get the path without the file name. ##jum##
     #Moves one branch up the file path. ##pyapor## ##jum##  
@@ -69,28 +72,50 @@ class FileCore():
                 
 	    if self.debug: print 'the project folder ' + projFolderName + ' has been created under : ' + projFolderPath
 
+    def parseUnWanted(self, fileList):
+        
+        if self.debug: print fileList
+        parseList = []
+        excluded = []
+        for parse in fileList:
+            if re.match('_', parse):
+                excluded.append(parse)
+            elif re.match('\.', parse):
+                excluded.append(parse)
+            else:
+                parseList.append(parse)
+        
+        parseList.sort()        
+        if self.debug: print parseList
+        if self.debug: print ' is the list of parsed names.'
+        if self.debug: print excluded
+        if self.debug: print ' is the list of excluded names.'
+        
+        return parseList
+
     #Returns whether a folder is empty or not. ##pyapor##
     def fileCoreQueryDir(self, folderPath):
-        print folderPath
-        dirList = os.listdir(folderPath)
+        if self.debug: print folderPath + ' is the folder path queried.'
+        parseList = os.listdir(folderPath)
+        dirList = self.parseUnWanted(parseList)
         if self.debug: print dirList
+        if self.debug: print ' is a list of files of the folder path.'
         if dirList == [] :
             if self.debug: folderPath + " is empty."
             return True
         else:
             dirList = os.listdir(folderPath)
             dirList = str(dirList)
-            print ('The list of files in ' + folderPath + ' is ' + dirList + '.')
+            if self.debug: print ('The list of files in ' + folderPath + ' is ' + dirList + '.')
             return False
     
     #Brings back a list of all of the files in a folder... this could probably be used later on to check if any files are missing. ##pyapor##  
     def fileCoreQueryDirList(self, folderPath):
-        dirList = os.listdir(folderPath)
+        parseList = os.listdir(folderPath)
+        dirList = self.parseUnWanted(parseList)
         if dirList == [] :
             return False
         else:
+            dirList.sort()
             if self.debug: print dirList
             return dirList
-    
-    def fileFoo(self):
-        print 'file foo!!'
